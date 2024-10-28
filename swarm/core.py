@@ -5,8 +5,8 @@ from collections import defaultdict
 from typing import List, Callable, Union
 
 # Package/library imports
-from openai import OpenAI
-
+from openai import AzureOpenAI
+import os
 
 # Local imports
 from .util import function_to_json, debug_print, merge_chunk
@@ -26,7 +26,11 @@ __CTX_VARS_NAME__ = "context_variables"
 class Swarm:
     def __init__(self, client=None):
         if not client:
-            client = OpenAI()
+            # client = OpenAI()
+            client = AzureOpenAI(
+                api_key=os.getenv("AZURE_OPENAI_API_KEY"),  
+                api_version="2024-07-01-preview",
+                azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"))
         self.client = client
 
     def get_chat_completion(

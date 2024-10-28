@@ -1,0 +1,22 @@
+{
+    "name": "Python 3.10 Dev Container",
+    "image": "mcr.microsoft.com/vscode/devcontainers/python:3.10",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/bash"
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-toolsai.jupyter",
+                "ms-vscode.vscode-typescript-next"
+            ]
+        }
+    },
+    "postCreateCommand": "pip install -r requirements.txt",
+    "forwardPorts": [3000],
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/swarm,type=bind,consistency=cached"
+    ],
+    "remoteUser": "vscode"
+}
